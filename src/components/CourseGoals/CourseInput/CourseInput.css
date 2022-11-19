@@ -24,7 +24,7 @@
 }
 
 .form-control.invalid label{
-  color: rgb(249, 49, 49);
+  color: rgb(255, 59, 59);
 }
 
 .form-control.invalid input{

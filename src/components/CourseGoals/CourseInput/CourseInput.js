@@ -17,12 +17,14 @@ const FormControl = styled.div`
     font-weight: bold;
     display: block;
     margin-bottom: 0.5rem;
+    color: ${props => (props.invalid ? 'rgb(249, 49, 49)' : '')};
   }
 
   && input {
     display: block;
     width: 100%;
-    border: 1px solid #ccc;
+    border: 1px solid #ccc ${props => (props.invalid ? 'red' : '#ccc' )} ; 
+    background: ${props => (props.invalid ? '#fad0ec' : 'transparent')};
     font: inherit;
     line-height: 1.5rem;
     padding: 0 0.25rem;
@@ -30,18 +32,18 @@ const FormControl = styled.div`
 
   && input:focus {
     outline: none;
-    background: #fad0ec;
+    background: #fad0ec; 
     border-color: #8b005d;
   }
 
-  &&.invalid label{
-    color: rgb(249, 49, 49);
-  }
+  // &&.invalid label{
+  //   color: rgb(249, 49, 49);
+  // }
 
-  &&.invalid input{
-    border-color: #f93011;
-    background: #febbb0;
-  }
+  // &&.invalid input{
+  //   border-color: #f93011;
+  //   background: #febbb0;
+  // }
 `;
 
 const CourseInput = (props) => {
@@ -67,7 +69,7 @@ const CourseInput = (props) => {
   // with sytle component
   return (
     <form onSubmit={formSubmitHandler}>
-      <FormControl className={`${!IsValid ? "invalid" : ''}`}>
+      <FormControl invalid={!IsValid}>
         <label>Course Goal</label>
         <input
           type="text"
