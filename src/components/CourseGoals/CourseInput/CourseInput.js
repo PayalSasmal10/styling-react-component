@@ -1,7 +1,48 @@
 import React, { useState } from "react";
 
 import Button from "../../UI/Button/Button";
-import "./CourseInput.css";
+
+// without styled component
+// import "./CourseInput.css";
+
+// with styled component
+import styled from "styled-components";
+
+const FormControl = styled.div`
+  
+  margin: 0.5rem 0;
+
+
+  && label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  && input {
+    display: block;
+    width: 100%;
+    border: 1px solid #ccc;
+    font: inherit;
+    line-height: 1.5rem;
+    padding: 0 0.25rem;
+  }
+
+  && input:focus {
+    outline: none;
+    background: #fad0ec;
+    border-color: #8b005d;
+  }
+
+  &&.invalid label{
+    color: rgb(249, 49, 49);
+  }
+
+  &&.invalid input{
+    border-color: #f93011;
+    background: #febbb0;
+  }
+`;
 
 const CourseInput = (props) => {
   const [enteredValue, setEnteredValue] = useState("");
@@ -23,7 +64,22 @@ const CourseInput = (props) => {
     props.onAddGoal(enteredValue);
   };
 
+  // with sytle component
   return (
+    <form onSubmit={formSubmitHandler}>
+      <FormControl className={`${!IsValid ? "invalid" : ''}`}>
+        <label>Course Goal</label>
+        <input
+          type="text"
+          onChange={goalInputChangeHandler}
+        />
+      </FormControl>
+      <Button type="submit">Add Goal</Button>
+    </form>
+  );
+
+  // without sytle component
+  /*return (
     <form onSubmit={formSubmitHandler}>
       <div className={`form-control ${!IsValid ? "invalid" : ''}`}>
         <label>Course Goal</label>
@@ -34,7 +90,7 @@ const CourseInput = (props) => {
       </div>
       <Button type="submit">Add Goal</Button>
     </form>
-  );
+  );*/
 };
 
 export default CourseInput;
